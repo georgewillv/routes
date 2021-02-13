@@ -1,4 +1,4 @@
-# Interview Project for C.H Robinson
+# Interview Project for [Company name Omitted for Privacy]
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
