@@ -6,7 +6,7 @@ This project was pushed to the Cloud using Heroku, you can find more about it [h
 
 ## Issues I've encountered:
 
-1. 2/12/2020 
-        - Translating HTML forms to react forms were more challening than expected; likely because this is my first time learning react. 
+### 2/12/2020 
+1. Translating HTML forms to react forms were more challening than expected; likely because this is my first time learning react. 
 
-        - I've got the barebones form up and running on local machine. Currently trying to figure out how to get the sent form data as a value.
+2. I've got the barebones form up and running on local machine. Currently trying to figure out how to get the sent form data as a value.
