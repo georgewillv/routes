@@ -5,44 +5,68 @@ class LocationForm extends Component{
         super(props)
 
         this.state = {
-            locStart: ''
+            locEnd: ''
         }
     }
 
     /*Class Property */
     /*When you handle an on change event, the event itself is passed as a parameter to the handler */
-    handleLocStartChange = (event) => {
+    handleLocEndChange = (event) => {
         this.setState({
-            locStart: event.target.value
+            locEnd: event.target.value
         })
     }
 
-    handleSubmit = (event) => {
-        alert(`${this.state.locStart}`)
+    getRoutes() {
+        let countries = ["USA", "MEX", "GTM", "HND", "NIC", "CRI", "PAN"]
+        //handle Canada edge case
+        if( this.state.locEnd == "CAN" ){
+            console.log("USA -> CAN")
+        }
+        //handle Belize case
+        else if(this.state.locEnd == "BLZ") {
+            console.log("USA -> MEX -> BLZ")
+        }
+        //handle El Salvador Case
+        else if(this.state.locEnd == "SLZ"){
+            console.log("USA -> MEX -> GTM -> SLZ")
+        }
+        //the rest can be processed via a loop
+        else {
+            //getting some error here. Whenever a country from countries is inputted, the page errors out and
+            //auto refreshes
+            alert("hit error");
+            for(var i = 0; i < countries.length(); i++){
+                if( this.state.locEnd != countries[i] ) {
+                    console.log(countries[i] + "-> ")
+                }
+                if (this.state.locEnd == countries[i] ){
+                    console.log(this.state.locEnd);
+                }
+            }
+        }
 
+    }
+
+    handleClick = (event) => {
+        alert(`${this.state.locEnd}`)
+        this.getRoutes();
         /* line below prevents form data from being dropped on submit */
         event.preventDefault()
+
     }
-    /*if you wanted to use an OnClick Event you could:
-     create a button,
-     create an OnClick Event handler on the button,
-     and have the exact same body as the OnSubmit event.
-
-     However, since 'type="submit"' in our form below, this allows the user to submit forms by hitting the enter key.
-     In the interest of User Experience. I think this is better */
-
     render(){
-        const {locStart} = this.state
+        const {locEnd} = this.state
         return (
-            <form onSubmit = {this.handleSubmit}>
+            <form>
                     <label> LocationStart </label>
                     <input 
                         type = "text" 
-                        value = {locStart} 
-                        onChange ={this.handleLocStartChange} 
+                        value = {locEnd} 
+                        onChange ={this.handleLocEndChange} 
                         required/>
                     <div>
-                    <button type = "submit"> Click to get Traversal Path</button>
+                    <button onClick={this.handleClick}> Click to get Traversal Path</button>
                     </div>
             </form>
         )
