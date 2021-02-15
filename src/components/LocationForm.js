@@ -33,9 +33,6 @@ class LocationForm extends Component{
         }
         //the rest can be processed via a loop
         else {
-            //getting some error here. Whenever a country from countries is inputted, the page errors out and
-            //auto refreshes
-            alert("hit error");
             for(var i = 0; i < countries.length; i++){
                 if( this.state.locEnd != countries[i] ) {
                     console.log(countries[i] + "-> ");
