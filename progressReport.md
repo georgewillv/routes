@@ -6,7 +6,8 @@
 4. Figure out how to push the app to either azure or heroku. 
    Azure likely will be a reach goal, depending on when app functionality is working as intended on local machine
 5. Write README so that a fresh junior dev could put the project together.
-
+6. Implement input constraints
+7. Put together docker file? likely another reach goal
 
 
 ## Issues I've encountered:
