@@ -1,3 +1,14 @@
+# TODO
+
+1. Figure out how to update list
+2. Push that list to the display. I can already push some text when the button is clicked
+3. Style the app
+4. Figure out how to push the app to either azure or heroku. 
+   Azure likely will be a reach goal, depending on when app functionality is working as intended on local machine
+5. Write README so that a fresh junior dev could put the project together.
+
+
+
 ## Issues I've encountered:
 
 ### 2/12/2020 
@@ -11,6 +22,9 @@
 2. Struggling to get logic to traverse countries working in 'getRoutes'. Edge cases work but something is likely wrong with for loop. 
 
 ### 2/15/2020 
-1. .length() is not a function. '.length' itself is. after enabling 'preserve log upon navigation' I was able to get the stack trace that was leading to react autorefreshing the page upon error.
+1. .length() is not a function. '.length' itself is (duh). After enabling 'preserve log upon navigation' I was able to get the stack trace that was leading to react autorefreshing the page upon error.
 
 2. Base logic for computing countries traversed working. Now I've got to figure a way to get the output in some sort of polished way, other than logging it to console. 
+
+### 2/16/2020
+1.
