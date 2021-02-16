@@ -7,7 +7,7 @@ class LocationForm extends Component{
 
         this.state = {
             locEnd: '',
-            output: ['USA'],
+            output: [],
             display: false
         }
     }
@@ -26,32 +26,51 @@ class LocationForm extends Component{
         })
     }
 
-    updateOutputList(){
-
+    updateOutputList(array){
+        this.setState({
+            output: array
+        })
     }
 
     getRoutes() {
-        let countries = ["USA", "MEX", "GTM", "HND", "NIC", "CRI", "PAN"]
+        let countries = ["USA", "MEX", "GTM", "HND", "NIC", "CRI", "PAN"];
+        let traverse = [];
         //handle Canada edge case
         if( this.state.locEnd == "CAN" ){
-            console.log("USA -> CAN");
+            //console.log("USA -> CAN");
+            traverse = ["USA", "CAN"];
+            console.log(traverse);
+            this.updateOutputList(traverse);
         }
         //handle Belize case
         else if(this.state.locEnd == "BLZ") {
-            console.log("USA -> MEX -> BLZ");
+            //console.log("USA -> MEX -> BLZ");
+            traverse = ["USA", "MEX", "BLZ"];
+            console.log(traverse);
+            this.updateOutputList(traverse);
+
         }
         //handle El Salvador Case
         else if(this.state.locEnd == "SLZ"){
-            console.log("USA -> MEX -> GTM -> SLZ");
+            //console.log("USA -> MEX -> GTM -> SLZ");
+            traverse = ["USA", "MEX", "GTM", "SLZ"];
+            console.log(traverse);
+            this.updateOutputList(traverse);
         }
         //the rest can be processed via a loop
         else {
             for(var i = 0; i < countries.length; i++){
                 if( this.state.locEnd != countries[i] ) {
-                    console.log(countries[i] + "-> ");
+                    //console.log(countries[i] + "-> ");
+                    traverse.push(countries[i]);
+                    //console.log(traverse);
                 }
                 if (this.state.locEnd == countries[i] ){
-                    console.log(this.state.locEnd);
+                    //console.log(this.state.locEnd);
+                    traverse.push(this.state.locEnd);
+                    //console.log("end loop");
+                    console.log(traverse);
+                    this.updateOutputList(traverse);
                     break;
                 }
             }
@@ -74,7 +93,7 @@ class LocationForm extends Component{
 
         let list;
         if(display){
-            list = <ul>output </ul>
+            list = <ol>{output}</ol>;
         }
         return (
             <form>

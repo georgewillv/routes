@@ -1,13 +1,15 @@
 # TODO
 
-1. Figure out how to update list
-2. Push that list to the display. I can already push some text when the button is clicked
+1. ~~Figure out how to update list~~
+2. ~~Push that list to the display. I can already push some text when the button is clicked~~
+    - Output is pushed, but there are no spaces between the array values
 3. Style the app
 4. Figure out how to push the app to either azure or heroku. 
-   Azure likely will be a reach goal, depending on when app functionality is working as intended on local machine
+   Azure likely will be a Reach goal, depending on when app functionality is working as intended on local machine
 5. Write README so that a fresh junior dev could put the project together.
 6. Implement input constraints
-7. Put together docker file? likely another reach goal
+7. Put together docker file? likely another Reach goal
+8. setup unit tests somehow? Definite Reach goal 
 
 
 ## Issues I've encountered:
