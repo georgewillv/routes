@@ -2,7 +2,8 @@
 
 1. ~~Figure out how to update list~~
 2. ~~Push that list to the display. I can already push some text when the button is clicked~~
-    - Output is pushed, but there are no spaces between the array values
+    - ~~Output is pushed, but there are no spaces between the array values~~ 
+    - ~~Also, 'list' output is not in a formatted view~~
 3. Style the app
 4. Figure out how to push the app to either azure or heroku. 
    Azure likely will be a Reach goal, depending on when app functionality is working as intended on local machine
@@ -30,4 +31,5 @@
 2. Base logic for computing countries traversed working. Now I've got to figure a way to get the output in some sort of polished way, other than logging it to console. 
 
 ### 2/16/2020
-1.
+1. Output is pushed to the user's view when the given input is entered. 
+
