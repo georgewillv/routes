@@ -20,6 +20,10 @@ class LocationForm extends Component{
         })
     }
 
+    handleValidation(){
+
+    }
+
     handleDisplayChange = (event) => {
         this.setState({
             display: true
@@ -41,6 +45,7 @@ class LocationForm extends Component{
             traverse = ["USA", "CAN"];
             console.log(traverse);
             this.updateOutputList(traverse);
+
         }
         //handle Belize case
         else if(this.state.locEnd == "BLZ") {
@@ -83,17 +88,19 @@ class LocationForm extends Component{
         this.getRoutes();
         this.handleDisplayChange();
         /* line below prevents form data from being dropped on submit */
-        event.preventDefault()
+        event.preventDefault();
 
     }
     render(){
         const {locEnd} = this.state;
         const display = this.state.display;
-        const output = this.state.output
+        const output = this.state.output;
+        const outputItems = output.map(output => <li key = {output.toString()}>{output}</li>);
+        //const {output} = this.state.output; //<--- this breaks program
 
-        let list;
+        let list = [];
         if(display){
-            list = <ol>{output}</ol>;
+            list = <ol>{outputItems}</ol>;
         }
         return (
             <form>
