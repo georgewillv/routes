@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Demo1 from "./Demo1.js";
 
-class LocationForm extends Component{
+class LocationForm extends Component {
     constructor(props) {
         super(props)
 
@@ -9,7 +8,7 @@ class LocationForm extends Component{
             locEnd: '',
             output: [],
             display: false,
-            displayMessage: "The carrier will need customs documentation for the following countries: "
+            displayMessage: ""
         }
     }
 
@@ -27,20 +26,20 @@ class LocationForm extends Component{
         })
     }
 
-    updateOutputList(array){
+    updateOutputList(array) {
         this.setState({
             output: array
         })
     }
 
 
-    blankUserInput(){
+    blankUserInput() {
         this.setState({
             displayMessage: "Please enter a country code from the list above"
         })
     }
 
-    updateMessage(){
+    updateMessage() {
         this.setState({
             displayMessage: "The carrier will need customs documentation for the following countries: "
         })
@@ -50,33 +49,33 @@ class LocationForm extends Component{
         let countries = ["USA", "MEX", "GTM", "HND", "NIC", "CRI", "PAN"];
         let traverse = [];
         //handle Canada edge case
-        if( this.state.locEnd == ''){
+        if (this.state.locEnd == '') {
             this.blankUserInput();
         }
-        else if( this.state.locEnd == "CAN" ){
+        else if (this.state.locEnd == "CAN") {
             traverse = ["USA", "CAN"];
             this.updateOutputList(traverse);
             this.updateMessage();
         }
         //handle Belize case
-        else if(this.state.locEnd == "BLZ") {
+        else if (this.state.locEnd == "BLZ") {
             traverse = ["USA", "MEX", "BLZ"];
             this.updateOutputList(traverse);
             this.updateMessage();
         }
         //handle El Salvador Case
-        else if(this.state.locEnd == "SLZ"){
+        else if (this.state.locEnd == "SLZ") {
             traverse = ["USA", "MEX", "GTM", "SLZ"];
             this.updateOutputList(traverse);
             this.updateMessage();
         }
         //the rest can be processed via a loop
         else {
-            for(var i = 0; i < countries.length; i++){
-                if( this.state.locEnd != countries[i] ) {
+            for (var i = 0; i < countries.length; i++) {
+                if (this.state.locEnd != countries[i]) {
                     traverse.push(countries[i]);
                 }
-                if (this.state.locEnd == countries[i] ){
+                if (this.state.locEnd == countries[i]) {
                     traverse.push(this.state.locEnd);
                     this.updateOutputList(traverse);
                     this.updateMessage();
@@ -94,31 +93,34 @@ class LocationForm extends Component{
         event.preventDefault();
 
     }
-    render(){
-        const {locEnd} = this.state;
+    render() {
+        const { locEnd } = this.state;
         const display = this.state.display;
         const output = this.state.output;
-        const outputItems = output.map(output => <li key = {output.toString()}>{output}</li>);
+        const outputItems = output.map(output => <li key={output.toString()}>{output}</li>);
         //const {output} = this.state.output; //<--- this breaks program
         const displayMessage = this.state.displayMessage;
         let message;
         let list;
-        if(display){
+        if (display && displayMessage != "Please enter a country code from the list above") {
             message = <h4>{displayMessage}</h4>;
             list = <ol>{outputItems}</ol>;
         }
+        else{
+            message = <h4> {displayMessage} </h4>
+        }
         return (
-            <form className = "locationForm">
-                    <label> Destination: </label>
-                    <input
-                        type = "text" 
-                        value = {locEnd} 
-                        onChange ={this.handleLocEndChange} 
-                        required/>
-                    <div>
+            <form className="locationForm">
+                <label> Destination: </label>
+                <input
+                    type="text"
+                    value={locEnd}
+                    onChange={this.handleLocEndChange}
+                    required />
+                <div>
                     <button onClick={this.handleClick}> Click to get Traversal Path</button>
-                    </div>
-                    <div className = "userResponse"> 
+                </div>
+                <div className="userResponse">
                     {message} {list} </div>
             </form>
         )

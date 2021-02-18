@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import LocationForm from './components/LocationForm';
 import './App.css';
-//testing whether if I push a change to git, the change will reflect in azure
 
 function App() {
   return (
