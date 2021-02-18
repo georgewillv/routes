@@ -4,7 +4,7 @@
 2. ~~Push that list to the display. I can already push some text when the button is clicked~~
     - ~~Output is pushed, but there are no spaces between the array values~~ 
     - ~~Also, 'list' output is not in a formatted view~~
-3. Style the app
+3. ~~Style the app~~
 4. Figure out how to push the app to either azure or heroku. 
    Azure likely will be a Reach goal, depending on when app functionality is working as intended on local machine
 5. Write README so that a fresh junior dev could put the project together.
@@ -33,3 +33,8 @@
 ### 2/16/2020
 1. Output is pushed to the user's view when the given input is entered. 
 
+### 2/17/2020
+1. App is styled, albeit slightly. Better than what it was prior to formatting outputs. 
+2. Through some debugging, the 'carrier will need .... following countries' message was displaying onClick/ on enter being pressed. 
+    - if no input goes through, a message prompts the user (again) to enter an input from the list above. 
+3. I would like to say input constraints are finished, but I will try to break them some more in the following days before marking that off the to do list. 
