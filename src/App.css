@@ -1,8 +1,26 @@
 .App {
   text-align: center;
 }
+.App .userResponse{
+    text-align: left;
+    margin-left: 10em;
+}
 
+.App .AppHeader{
+  margin-left: 20em;
+  margin-right: 20em;
+  border-style: double;
+  border-color: black;
+  border-width: 10px;
+  background-color: #Dcf1fa;
+}
+.App .spacer {
+  margin: 40px;
+}
 
+form label{
+  font-weight: bold;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
