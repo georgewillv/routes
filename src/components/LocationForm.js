@@ -8,7 +8,8 @@ class LocationForm extends Component{
         this.state = {
             locEnd: '',
             output: [],
-            display: false
+            display: false,
+            displayMessage: "The carrier will need customs documentation for the following countries: "
         }
     }
 
@@ -32,25 +33,42 @@ class LocationForm extends Component{
         })
     }
 
+
+    blankUserInput(){
+        this.setState({
+            displayMessage: "Please enter a country code from the list above"
+        })
+    }
+
+    updateMessage(){
+        this.setState({
+            displayMessage: "The carrier will need customs documentation for the following countries: "
+        })
+    }
+
     getRoutes() {
         let countries = ["USA", "MEX", "GTM", "HND", "NIC", "CRI", "PAN"];
         let traverse = [];
         //handle Canada edge case
-        if( this.state.locEnd == "CAN" ){
+        if( this.state.locEnd == ''){
+            this.blankUserInput();
+        }
+        else if( this.state.locEnd == "CAN" ){
             traverse = ["USA", "CAN"];
             this.updateOutputList(traverse);
-
+            this.updateMessage();
         }
         //handle Belize case
         else if(this.state.locEnd == "BLZ") {
             traverse = ["USA", "MEX", "BLZ"];
             this.updateOutputList(traverse);
-
+            this.updateMessage();
         }
         //handle El Salvador Case
         else if(this.state.locEnd == "SLZ"){
             traverse = ["USA", "MEX", "GTM", "SLZ"];
             this.updateOutputList(traverse);
+            this.updateMessage();
         }
         //the rest can be processed via a loop
         else {
@@ -61,6 +79,7 @@ class LocationForm extends Component{
                 if (this.state.locEnd == countries[i] ){
                     traverse.push(this.state.locEnd);
                     this.updateOutputList(traverse);
+                    this.updateMessage();
                     break;
                 }
             }
@@ -81,15 +100,17 @@ class LocationForm extends Component{
         const output = this.state.output;
         const outputItems = output.map(output => <li key = {output.toString()}>{output}</li>);
         //const {output} = this.state.output; //<--- this breaks program
-
-        let list = [];
+        const displayMessage = this.state.displayMessage;
+        let message;
+        let list;
         if(display){
+            message = <h4>{displayMessage}</h4>;
             list = <ol>{outputItems}</ol>;
         }
         return (
-            <form>
-                    <label> LocationStart </label>
-                    <input 
+            <form className = "locationForm">
+                    <label> Destination: </label>
+                    <input
                         type = "text" 
                         value = {locEnd} 
                         onChange ={this.handleLocEndChange} 
@@ -97,7 +118,8 @@ class LocationForm extends Component{
                     <div>
                     <button onClick={this.handleClick}> Click to get Traversal Path</button>
                     </div>
-                    {list}
+                    <div className = "userResponse"> 
+                    {message} {list} </div>
             </form>
         )
     }
