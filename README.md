@@ -2,4 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-This project was pushed to the Cloud using Heroku, you can find more about it [here](heroku.com).
+This project was pushed to the Cloud using Azure, you can find more about it [here](https://devblogs.microsoft.com/premier-developer/deploying-react-apps-to-azure-with-azure-devops/).
+
+
+
