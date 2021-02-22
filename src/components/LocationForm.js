@@ -5,80 +5,90 @@ class LocationForm extends Component {
         super(props)
 
         this.state = {
-            locEnd: '',
+            destination: "CAN",
             output: [],
             display: false,
             displayMessage: ""
         }
+
+        this.handleSelectChange.bind(this);
+        this.handleClick.bind(this);
     }
 
     /*Class Property */
     /*When you handle an on change event, the event itself is passed as a parameter to the handler */
-    handleLocEndChange = (event) => {
+    handleSelectChange = (event) => {
         this.setState({
-            locEnd: event.target.value.toLocaleUpperCase(),
-        })
+            destination: event.target.value,
+            display: false //This resets display to false after the traversal button has been clicked. 
+        });
+        
     }
 
-    handleDisplayChange = (event) => {
+    handleDisplayChange = () => {
         this.setState({
             display: true
-        })
+        });
     }
 
     updateOutputList(array) {
         this.setState({
             output: array
-        })
+        });
     }
 
-
-    blankUserInput() {
-        this.setState({
-            displayMessage: "Please enter a country code from the list above"
-        })
+    handleMessage() {
+        if(this.state.destination == "USA"){
+            this.setState({
+                displayMessage: "The Carrier should not need any customs documenation if they are traversing through the United States"
+            });
+        }
+        else {
+            this.setState({
+                displayMessage: " the carrier will need customs documentation for the following countries: "
+            });
+        }
     }
 
-    updateMessage() {
-        this.setState({
-            displayMessage: "The carrier will need customs documentation for the following countries: "
-        })
+    handleClick = (event) => {
+        this.getRoutes();
+        this.handleDisplayChange();
+        //this.handleMessage();
+        /* line below prevents form data from being dropped on submit */
+        event.preventDefault();
     }
 
     getRoutes() {
-        let countries = ["USA", "MEX", "GTM", "HND", "NIC", "CRI", "PAN"];
-        let traverse = [];
+        var countries = ["USA", "MEX", "GTM", "HND", "NIC", "CRI", "PAN"];
+        var traverse = [];
         //handle Canada edge case
-        if (this.state.locEnd == '') {
-            this.blankUserInput();
-        }
-        else if (this.state.locEnd == "CAN") {
+        if (this.state.destination == "CAN") {
             traverse = ["USA", "CAN"];
             this.updateOutputList(traverse);
-            this.updateMessage();
+            this.handleMessage();
         }
         //handle Belize case
-        else if (this.state.locEnd == "BLZ") {
+        else if (this.state.destination == "BLZ") {
             traverse = ["USA", "MEX", "BLZ"];
             this.updateOutputList(traverse);
-            this.updateMessage();
+            this.handleMessage();
         }
         //handle El Salvador Case
-        else if (this.state.locEnd == "SLZ") {
+        else if (this.state.destination == "SLZ") {
             traverse = ["USA", "MEX", "GTM", "SLZ"];
             this.updateOutputList(traverse);
-            this.updateMessage();
+            this.handleMessage();
         }
         //the rest can be processed via a loop
         else {
             for (var i = 0; i < countries.length; i++) {
-                if (this.state.locEnd != countries[i]) {
+                if (this.state.destination !== countries[i]) {
                     traverse.push(countries[i]);
                 }
-                if (this.state.locEnd == countries[i]) {
-                    traverse.push(this.state.locEnd);
+                if (this.state.destination == countries[i]) {
+                    traverse.push(countries[i]);
                     this.updateOutputList(traverse);
-                    this.updateMessage();
+                    this.handleMessage();
                     break;
                 }
             }
@@ -86,41 +96,61 @@ class LocationForm extends Component {
 
     }
 
-    handleClick = (event) => {
-        this.getRoutes();
-        this.handleDisplayChange();
-        /* line below prevents form data from being dropped on submit */
-        event.preventDefault();
 
-    }
     render() {
-        const { locEnd } = this.state;
+        const destination = this.state.destination;
         const display = this.state.display;
         const output = this.state.output;
         const outputItems = output.map(output => <li key={output.toString()}>{output}</li>);
-        //const {output} = this.state.output; //<--- this breaks program
         const displayMessage = this.state.displayMessage;
         let message;
         let list;
-        if (display && displayMessage != "Please enter a country code from the list above") {
-            message = <h4>{displayMessage}</h4>;
+
+        if(display && destination !== "USA") {
+            message = <h4> To go from USA to {destination}, {displayMessage}</h4>;
             list = <ol>{outputItems}</ol>;
         }
-        else{
-            message = <h4> {displayMessage} </h4>
+        else if(display && destination == "USA"){
+            message = <h4>{displayMessage} </h4>;
+            list = <ol>{outputItems}</ol>;
         }
+
+        
         return (
-            <form className="locationForm">
-                <label> Destination: </label>
-                <input
-                    type="text"
-                    value={locEnd}
-                    onChange={this.handleLocEndChange}
-                    required />
+            <form className="locationForm" onClick = {this.handleClick}>
+                <label> Destination:
+                    <select destination = {this.state.destination} onChange= {this.handleSelectChange}>
+                        <option destination = "CAN">CAN</option>
+                        <option destination = "USA">USA</option>
+                        <option destination = "MEX">MEX</option>
+                        <option destination = "BLZ">BLZ</option>
+                        <option destination = "GTM">GTM</option>
+                        <option destination = "SLZ">SLZ</option>
+                        <option destination = "HND">HND</option>
+                        <option destination = "NIC">NIC</option>
+                        <option destination = "CRI">CRI</option>
+                        <option destination = "PAN">PAN</option>
+                    </select>
+                </label>
+                {/*<input type = "submit" value="Click to get Traversal Path"></input>*/}
                 <div>
                     <button onClick={this.handleClick}> Click to get Traversal Path</button>
                 </div>
-                <div className="userResponse">
+                
+                {/*
+                <input
+                    type = "text"
+                    value = {locEnd}
+                    onChange = {this.handleLocEndChange}
+                    required 
+                    //above line only needed when form is being submitted for processing
+                    />
+                
+                <div>
+                    <button onClick = {this.handleClick}> Click to get Traversal Path</button>
+                </div>
+                */}
+                <div className = "userResponse">
                     {message} {list} </div>
             </form>
         )
