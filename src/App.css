@@ -11,17 +11,13 @@
   margin-right: 20em;
   border-style: double;
   border-color: black;
-  border-width: 10px;
+  border-width: .6250em;
   background-color: #Dcf1fa;
 }
 .App .Spacer {
-  margin: 40px;
+  margin: 2.5em;
 }
 
 form label{
   font-weight: bold;
-}
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
 }
