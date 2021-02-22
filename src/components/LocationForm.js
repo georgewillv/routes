@@ -117,7 +117,7 @@ class LocationForm extends Component {
 
         
         return (
-            <form className="locationForm" onClick = {this.handleClick}>
+            <form className="locationForm" >
                 <label> Destination:
                     <select destination = {this.state.destination} onChange= {this.handleSelectChange}>
                         <option destination = "CAN">CAN</option>
