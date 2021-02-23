@@ -26,7 +26,7 @@
 2. Struggling to get logic to traverse countries working in 'getRoutes'. Edge cases work but something is likely wrong with for loop. 
 
 ### 2/15/2021 
-1. .length() is not a function. '.length' itself is (duh). After enabling 'preserve log upon navigation' I was able to get the stack trace that was leading to react autorefreshing the page upon error.
+1. .length() is not a function. '.length' itself. After enabling 'preserve log upon navigation' in chrome developer tools I was able to get the stack trace that was leading to react autorefreshing the page upon error.
 
 2. Base logic for computing countries traversed working. Now I've got to figure a way to get the output in some sort of polished way, other than logging it to console. 
 
@@ -49,3 +49,13 @@
 1. Input constraints were not implemented. Instead I opted for a select / dropdown menu considering it is "less work" for the user and thus enhances the User experience. Previously users would have to make a minimum of 3 keystrokes per letter assuming they didn't make a mistake in the country code. Assuming this application would be used multiple times throughout someones daily job, it would be very frustrating having "please enter a valid input" "constantly" appear. With the drop down menu users need to either click and scroll, or click and use one keystroke to find their country, plus the final enter click for a total of 2 clicks + 1 keystroke or 3 clicks. This also saves me as a developer time/work, as I don't have to implement the input constraints. 
 
 2. I have noticed that the app will not load on occasion when visiting the domain name I've deployed it under. I have done some research and am still not sure what the issue could be. I'm assuming its because I've deployed it under the 'free' subscriptions/services from azure and as such the performance is going to be highly affected. When visiting the domain name via the azure portal I have to wait anywhere from 0-30 seconds to get the page to load. After that however, the page will load in 0-3 seconds. It appears there is a 'spin up' time for the app to load from the cloud after it not receiving requests for an alloted time frame. I do not know what that time frame is. 
+
+### 2/22/2021
+1. Fixed Azure loading issue. 
+    - Changed HTTP version from 1.1 to 2.0. 
+    - Changed subscription plan from free to 'B1'
+    - Changed Node Minor Version to 10.14 from 10.10 (10.10 deprecated)
+    - Loading issues were caused by "Always On" being disabled and not changeable under the "Free" plan. Other changes were made in for optimization.
+
+2. User reponse message now shows the specific countries they were asking for instead of just the country code
+    - Country code output list remains unchanged as per prompt
