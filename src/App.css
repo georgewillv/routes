@@ -2,8 +2,13 @@
   text-align: center;
 }
 .App .userResponse{
-    text-align: left;
-    margin-left: 10em;
+    text-align: center;
+    /*margin-left: 10em;*/
+    /*margin-right: 10em;*/
+}
+.App .requestedOutput{
+  text-align: left;
+  margin-left: 8.75em;
 }
 
 .App .AppHeader{

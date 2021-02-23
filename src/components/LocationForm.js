@@ -20,7 +20,7 @@ class LocationForm extends Component {
     handleSelectChange = (event) => {
         this.setState({
             destination: event.target.value,
-            display: false //This resets display to false after the traversal button has been clicked. 
+            display: false //This line resets message display to false after the traversal button has been clicked. 
         });
         
     }
@@ -53,7 +53,6 @@ class LocationForm extends Component {
     handleClick = (event) => {
         this.getRoutes();
         this.handleDisplayChange();
-        //this.handleMessage();
         /* line below prevents form data from being dropped on submit */
         event.preventDefault();
     }
@@ -93,11 +92,23 @@ class LocationForm extends Component {
                 }
             }
         }
-
     }
 
 
     render() {
+        const country_code_to_country = {
+            CAN: "Canada (CAN)",
+            USA: "United States (USA)",
+            MEX: "Mexico (MEX)",
+            BLZ: "Belize (BLZ)",
+            GTM: "Guatemala (GTM)",
+            SLZ: "El Salvador (SLZ)",
+            HND: "Honduras (HND)",
+            NIC: "Nicaragua (NIC)",
+            CRI: "Costa Rica (CRI)",
+            PAN: "Panama (PAN)"
+        };
+
         const destination = this.state.destination;
         const display = this.state.display;
         const output = this.state.output;
@@ -107,7 +118,7 @@ class LocationForm extends Component {
         let list;
 
         if(display && destination !== "USA") {
-            message = <h4> To go from USA to {destination}, {displayMessage}</h4>;
+            message = <h4> To go from the United States (USA) to {country_code_to_country[destination]}, {displayMessage}</h4>;
             list = <ol>{outputItems}</ol>;
         }
         else if(display && destination == "USA"){
@@ -132,26 +143,15 @@ class LocationForm extends Component {
                         <option destination = "PAN">PAN</option>
                     </select>
                 </label>
-                {/*<input type = "submit" value="Click to get Traversal Path"></input>*/}
                 <div>
                     <button onClick={this.handleClick}> Click to get Traversal Path</button>
                 </div>
-                
-                {/*
-                <input
-                    type = "text"
-                    value = {locEnd}
-                    onChange = {this.handleLocEndChange}
-                    required 
-                    //above line only needed when form is being submitted for processing
-                    />
-                
-                <div>
-                    <button onClick = {this.handleClick}> Click to get Traversal Path</button>
-                </div>
-                */}
                 <div className = "userResponse">
-                    {message} {list} </div>
+                    {message}
+                </div>
+                <div className = "requestedOutput">
+                    {list} 
+                </div>
             </form>
         )
     }

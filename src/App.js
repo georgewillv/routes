@@ -5,7 +5,6 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <title> Customs Documentation Finder </title>
       <div className= "Greeting">
         <h1> Welcome to C.H. Robinson's Necessary Customs Documentation Generator </h1>
         <p> This application will generate the countries that a truck driver carrier will need customs documenation <br></br>
