@@ -7,7 +7,7 @@
 3. ~~Style the app~~
 4. ~Figure out how to push the app to either azure or heroku.~~ 
    ~Azure likely will be a Reach goal, depending on when app functionality is working as intended on local machine~
-5. Write README so that a fresh junior dev could put the project together.
+5. ~~Write README so that a fresh junior dev could put the project together.~~
 6. ~~Implement input constraints~~
 7. Put together docker file? likely another Reach goal
 8. setup unit tests somehow? Definite Reach goal 
@@ -26,7 +26,7 @@
 2. Struggling to get logic to traverse countries working in 'getRoutes'. Edge cases work but something is likely wrong with for loop. 
 
 ### 2/15/2021 
-1. .length() is not a function. '.length' itself. After enabling 'preserve log upon navigation' in chrome developer tools I was able to get the stack trace that was leading to react autorefreshing the page upon error.
+1. .length() is not a function. '.length' itself is. After enabling 'preserve log upon navigation' in chrome developer tools I was able to get the stack trace that was leading to react autorefreshing the page upon error.
 
 2. Base logic for computing countries traversed working. Now I've got to figure a way to get the output in some sort of polished way, other than logging it to console. 
 
@@ -55,7 +55,15 @@
     - Changed HTTP version from 1.1 to 2.0. 
     - Changed subscription plan from free to 'B1'
     - Changed Node Minor Version to 10.14 from 10.10 (10.10 deprecated)
-    - Loading issues were caused by "Always On" being disabled and not changeable under the "Free" plan. Other changes were made in for optimization.
+    - Loading issues were caused by "Always On" being disabled and not changeable under the "Free" plan. Other changes were made in an attempt to improve performance / for optimization.
 
 2. User reponse message now shows the specific countries they were asking for instead of just the country code
     - Country code output list remains unchanged as per prompt
+
+
+### 2/23/2021
+1. Updated Readme
+2. Ensured app was working from https://routesapp.azurewebsites.net
+    - The app had crashed. Modified azure pipeline to run 10.14 as it had defaulted back to 10.10. Additionally, went back into configuration -> general settings and changed node minor version to 10.14 and saved it, again. I hope it will stay at 10.14. 
+    - I have determined that the crash was due to a release or production pipeline accidentally being pushed through my Azure DevOps CI/CD and was causing abnormal behavior under my azure subscription/service. Hard to say if this is the definitive problem, but I'm 90% sure this is the issue. 
+3. Project is complete, Docker file and unit tests reach goals not accomplished. 
